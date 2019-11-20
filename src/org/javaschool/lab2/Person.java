@@ -57,5 +57,6 @@ public class Person {
         ivan.marry(masha);
         ivan.marry(masha);
         petr.marry(masha);
+        petr.marry(null);
     }
 }
