@@ -6,8 +6,11 @@ public class Container {
         ServerTerminal terminalServer = new ServerTerminal();
         Display display = new ConsoleDisplay();
 
-        Terminal terminal = new ClientTerminal(pinValidator, terminalServer, display);
-        terminal.withdraw(Float.valueOf(11.1f));
+        ClientTerminal terminal = new ClientTerminal(pinValidator, terminalServer, display);
+        /*display.showActionList();
+        terminal.enterPinCode(2486);
+        terminal.withdraw(Float.valueOf(1100f));
+        display.showActionList();*/
 
     }
 }

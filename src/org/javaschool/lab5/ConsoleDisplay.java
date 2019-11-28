@@ -9,7 +9,7 @@ public class ConsoleDisplay implements Display {
 
     @Override
     public void showMessage(MessageType messageType, String message) {
-        System.out.println(message.toString() + ": " + message);
+        System.out.println(messageType.toString() + ": " + message);
     }
 
     @Override
@@ -39,6 +39,12 @@ public class ConsoleDisplay implements Display {
 
     @Override
     public void showActionList() {
-
+        System.out.println("-----------------------------------");
+        System.out.println("Выберите действие из списка (введите номер из списка и нажмите \"Ввод\"):");
+        System.out.println("1. Ввести PIN-код");
+        System.out.println("2. Запросить баланс");
+        System.out.println("3. Внести наличные");
+        System.out.println("4. Снять наличные");
+        System.out.print(">");
     }
 }

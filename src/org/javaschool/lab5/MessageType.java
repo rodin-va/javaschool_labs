@@ -15,6 +15,11 @@ public enum MessageType {
 
     @Override
     public String toString() {
-        return "MessageType{" + printableName + "}";
+        if(this == INFO) {
+            return "";
+        } else {
+            return printableName;
+        }
+        //return "MessageType{" + printableName + "}";
     }
 }
