@@ -18,18 +18,20 @@ class NotEnoughMoneyException extends ServerTerminalException {
         super(message);
     }
 };
+
 class NullSumException extends ServerTerminalException {
     public NullSumException(String message) {
         super(message);
     }
 };
+
 class NegativeOrNullSumException extends ServerTerminalException {
     public NegativeOrNullSumException(String message) {
         super(message);
     }
 };
 
-final class ServerTerminal implements Terminal{
+final class ServerTerminal implements Terminal {
     private Float accountBalance;
 
     public ServerTerminal() {
@@ -41,6 +43,9 @@ final class ServerTerminal implements Terminal{
     }
 
     @Override
+    /** @param
+     *
+     */
     public Float deposit(Float sum) throws ServerTerminalException {
         /**{ validate block */
         if (sum == null) {
@@ -51,16 +56,12 @@ final class ServerTerminal implements Terminal{
         }
         /**} validate block */
 
-        try {
-            this.accountBalance += sum;
-            return this.accountBalance;
-        } catch (Throwable e) {
-            throw new ServerTerminalException("Server: Unknown Exception", e);
-        }
+        this.accountBalance += sum;
+        return this.accountBalance;
     }
 
     @Override
-    public Float withdraw(Float sum) throws ServerTerminalException {
+    public Float withdraw(Float sum) throws NotEnoughMoneyException, NegativeOrNullSumException, NullSumException {
         /**{ validate block */
         if (sum == null) {
             throw new NullSumException("Server: NullSumException");
@@ -74,11 +75,8 @@ final class ServerTerminal implements Terminal{
         }
         /**} validate block */
 
-        try {
-            this.accountBalance -= sum;
-            return this.accountBalance;
-        } catch (Throwable e) {
-            throw new ServerTerminalException("Server: Unknown Exception", e);
-        }
+        this.accountBalance -= sum;
+        return this.accountBalance;
+
     }
 }

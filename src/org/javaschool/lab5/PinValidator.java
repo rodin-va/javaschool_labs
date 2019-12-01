@@ -23,7 +23,7 @@ final class PinValidator {
         reset();
     }
 
-    public void validatePinCode(short pinCode) throws AccountIsLockedException, InvalidPinCodeException {
+    public void validatePinCode(int pinCode) throws AccountIsLockedException, InvalidPinCodeException {
         if (this.lockedTo == null || this.lockedTo.compareTo(new Date()) <= 0) {
 
             if(this.lockedTo != null) {
