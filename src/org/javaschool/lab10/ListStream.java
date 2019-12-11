@@ -18,7 +18,7 @@ public class ListStream<T> {
         return new ListStream<T>(list);
     }
 
-    public ListStream filter(Predicate<T> predicate) {
+    public ListStream<T> filter(Predicate<? super T> predicate) {
         for (int i = 0; i < list.size(); ++i) {
             if (!predicate.test(list.get(i))) {
                 list.remove(i);
@@ -28,7 +28,8 @@ public class ListStream<T> {
         return this;
     }
 
-    public ListStream transform(Function<T, T> mapper) {
+    // <R> Stream<R> map(Function<? super T, ? extends T> mapper);
+    public ListStream transform(Function<? super T, ? extends T> mapper) {
         ArrayList<T> tmp = new ArrayList<T>();
         this.list.forEach(item -> {
             tmp.add((T) mapper.apply(item));
@@ -37,7 +38,7 @@ public class ListStream<T> {
         return this;
     }
 
-    public <R1 extends Object, R2 extends Object> Map toMap(
+    /*public <R1 extends Object, R2 extends Object> Map toMap(
             Function<T, R1> keyMapper
             , Function<T, R2> valueMapper) {
         HashMap<R1, R2> tmp = new HashMap<>();
@@ -46,6 +47,23 @@ public class ListStream<T> {
         });
 
         return tmp;
+    }
+
+    public ListStream transform(Function mapper) {
+        ArrayList<T> tmp = new ArrayList<T>();
+        this.list.forEach(item -> {
+            tmp.add((T) mapper.apply(item));
+        });
+        this.list = tmp;
+        return this;
+    }*/
+
+    public Map toMap(Function<? super T, ? extends Object> keyMapper,Function<? super T, ? extends Object> valueMapper, Map map) {
+        this.list.forEach(item -> {
+            map.put(keyMapper.apply(item), valueMapper.apply(item));
+        });
+
+        return map;
     }
 }
 
